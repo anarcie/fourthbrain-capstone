@@ -60,6 +60,9 @@ def main(sysarg):
     print(sysarg)
     if sysarg[1] == "train":
         train()
+    elif sysarg[1] == 'gen':
+        import utils.sample_gen as sg
+        sg.main(['test'])
     else:
 
         imported = tf.keras.models.load_model('saved_model/newmodel')

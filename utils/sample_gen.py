@@ -10,13 +10,16 @@ import uuid
 __version__ = "0.0.1"
 
 __cwdpath__ = os.path.normpath(os.getcwd())
+__compath__ = os.path.normpath(os.path.join(__cwdpath__, "utils"))
 sys.path.append(__cwdpath__)
+sys.path.append(__compath__)
 import common as common
-__basepath__ = common.getOneLevelUp(__cwdpath__)
+
+__basepath__ = __cwdpath__# common.getOneLevelUp(__cwdpath__)
 __binpath__ = os.path.join(__basepath__, 'bin')
 __inppath__ = os.path.join(__basepath__, 'audio', 'input')
 __bgnpath__ = os.path.join(__basepath__, 'audio', 'noise')
-__outpath__ = os.path.join(__basepath__, 'audio', 'train', 'wakewordTesting')
+__outpath__ = os.path.join(__basepath__, 'audio', 'wakewordTesting')
 __trnpath__ = os.path.join(__basepath__, 'audio', 'train')
 sys.path.append(__basepath__)
 sys.path.append(__binpath__)
@@ -26,9 +29,9 @@ sys.path.append(__binpath__)
 common.ensureFolder(__outpath__)
 
 # Settings
-BGN_SOFTENERS = [15, 17, 20]
+BGN_SOFTENERS = [15, 17]
 BAS_LOUDER = [0, 5, 15, 20]
-SPL_SPEED = [0.8, 0.9, 1.0, 1.1, 1.2]
+SPL_SPEED = [0.8, 1.0, 1.2]
 
 # Add bin to syspath, for access to FFMPEG
 sys.path.append(os.path.normpath(__binpath__))
@@ -79,7 +82,7 @@ def overlay_noise(base):
     for s in base_sounds:
         base_outfilename = f"{uuid.uuid1()}.wav"
         base_outfilepath = os.path.join(__outpath__, base_outfilename)
-        s.export(base_outfilepath, format="wav", bitrate="1411", parameters=["-ac", "1", "-ar", "16000"])
+        s.export(base_outfilepath, format="wav", bitrate="800", parameters=["-ac", "1", "-ar", "8000"])
         base_duration = s.duration_seconds
 
         noise_sounds = []
@@ -107,7 +110,7 @@ def overlay_noise(base):
             # Output the result
             outfilename = f"{uuid.uuid1()}.wav"
             outfilepath = os.path.join(__outpath__, outfilename)
-            new_sound.export(outfilepath, format="wav", bitrate="1411", parameters=["-ac", "1", "-ar", "16000"])
+            new_sound.export(outfilepath, format="wav", bitrate="800", parameters=["-ac", "1", "-ar", "8000"])
 
 
 # --------------------------------------
