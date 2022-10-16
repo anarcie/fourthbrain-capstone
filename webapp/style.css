@@ -1,0 +1,16 @@
+#main{
+	padding:  20px;
+	margin:  0px auto;
+}
+
+.card{
+	margin:  0px 0px 8px;
+}
+
+.livetext{
+	margin:  4px 0px 4px;
+}
+
+#audioprocessing{
+	display:  none;
+}

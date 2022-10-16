@@ -1,0 +1,7 @@
+pandas
+matplotlib
+numpy
+seaborn
+tensorflow
+tensorflow_datasets
+libcudnn8=8.1.0.77-1+cuda11.2
