@@ -205,46 +205,6 @@ def Exit(ExitMessage="Finished", ExitCode=1):
 
 
 # --------------------------------------
-# setEnviromentals
-# --------------------------------------
-# Handles checking setting envs
-#
-# --------------------------------------
-def setEnviromentals(CONF):
-    '''Sets up the script specific enviromental information.
-    DEGEN_SCRIPT_PATH and OCIS_DIFF_OUT and WORKSPACE are all unique to
-    each run and config
-
-    Args:
-        CONF (configParser Obj): Config Parser Object
-
-    Returns:
-        None
-
-    '''
-    # Set Enviromental Vars
-    Out('Setting Enviromantals', 2, False)
-
-    path = os.path.dirname(os.path.abspath(os.path.join(__file__, '../')))
-    os.environ["DEGEN_SCRIPT_PATH"] = path
-    os.environ["OCIS_SCRIPT_PATH"] = path
-    Out('DEGEN_SCRIPT_PATH => {0}'.format(os.environ["DEGEN_SCRIPT_PATH"]), 3, False)
-    Out('OCIS_SCRIPT_PATH => {0}'.format(os.environ["OCIS_SCRIPT_PATH"]), 3, False)
-
-    # Set the Diff Path, and sub diff path with Script path is neccesary
-    SubEnv = CONF['Delta']['DiffPath'].replace('OCIS_SCRIPT_PATH', path).replace('#', '')
-    os.environ["DEGEN_DIFF_OUT"] = SubEnv
-    os.environ["OCIS_DIFF_OUT"] = SubEnv
-    Out('DEGEN_DIFF_OUT => {0}'.format(os.environ["DEGEN_DIFF_OUT"]), 3, False)
-    Out('OCIS_DIFF_OUT => {0}'.format(os.environ["OCIS_DIFF_OUT"]), 3, False)
-
-    if os.environ.get('WORKSPACE') is None:
-        userprofile = os.path.normpath(os.environ['USERPROFILE'])
-        desktop = os.path.abspath(os.path.join(userprofile, 'Desktop', 'Workspace'))
-        os.environ["WORKSPACE"] = desktop
-        ensureFolder(desktop)
-
-# --------------------------------------
 # GeneralExceptionMessage
 # --------------------------------------
 #
