@@ -57,7 +57,6 @@ def main(sysarg):
         None
 
     '''
-    print(sysarg)
     if sysarg[1] == "train":
         train()
     elif sysarg[1] == 'gen':
@@ -112,7 +111,6 @@ def train():
 
 
     print("## Building Dataset")
-
     train_ds = train_ds.map(squeeze, tf.data.AUTOTUNE)
     val_ds = val_ds.map(squeeze, tf.data.AUTOTUNE)
 
@@ -174,8 +172,6 @@ def train():
     loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'],
     )
-
-
 
     history = model.fit(
         train_spectrogram_ds,
